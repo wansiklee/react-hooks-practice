@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [item, setItem] = useState(1);
+  const plusItem = () => setItem(item + 1);
+  const minusItem = () => setItem(item - 1);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Number of Item : {item}</h1>
+      <button onClick={plusItem}>Plus</button>
+      <button onClick={minusItem}>Minus</button>
     </div>
   );
 }
+
+// class clsApp extends React.Component{
+//   state = {
+//     item : 1
+//   }
+//   return (
+//     <div className="App">
+//       <h1>Number of Item : {item}</h1>
+//       <button onClick={this.plusItem}>Plus</button>
+//       <button onClick={this.minusItem}>Minus</button>
+//     </div>
+//   );
+//   plusItem = () => {
+//     this.setState(state => {
+//       return {
+//         item: state.item + 1
+//       }
+//     })
+//   }
+//   minusItem = () => {
+//     this.setState(state => {
+//       return {
+//         item: state.item - 1
+//       }
+//     })
+//   }
+// }
 
 export default App;
