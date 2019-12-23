@@ -1,45 +1,31 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
+const useInput = (initialValue, validator) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = event => {
+    const {
+      target: { value }
+    } = event;
+    let willUpdate = true;
+    if (typeof validator === "function") {
+      willUpdate = validator(value);
+    }
+    if (willUpdate) {
+      setValue(value);
+    }
+  };
+  return { value, onChange };
+};
 
 function App() {
-  const [item, setItem] = useState(1);
-  const plusItem = () => setItem(item + 1);
-  const minusItem = () => setItem(item - 1);
+  const maxLen = value => value.length <= 10;
+  const name = useInput("Mr.", maxLen);
   return (
     <div className="App">
-      <h1>Number of Item : {item}</h1>
-      <button onClick={plusItem}>Plus</button>
-      <button onClick={minusItem}>Minus</button>
+      <h1>hello</h1>
+      <input placeholder="이름" {...name} />
     </div>
   );
 }
-
-// class clsApp extends React.Component{
-//   state = {
-//     item : 1
-//   }
-//   return (
-//     <div className="App">
-//       <h1>Number of Item : {item}</h1>
-//       <button onClick={this.plusItem}>Plus</button>
-//       <button onClick={this.minusItem}>Minus</button>
-//     </div>
-//   );
-//   plusItem = () => {
-//     this.setState(state => {
-//       return {
-//         item: state.item + 1
-//       }
-//     })
-//   }
-//   minusItem = () => {
-//     this.setState(state => {
-//       return {
-//         item: state.item - 1
-//       }
-//     })
-//   }
-// }
 
 export default App;
